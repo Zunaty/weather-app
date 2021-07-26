@@ -8,7 +8,7 @@ function searchW() {
 
     // Checking for nothing in search input
     if(!locSearch){
-        alert("Please search a city")
+        alert("Please search a city");
     }
 
     // Adding search to history and not including repeats
@@ -68,9 +68,9 @@ function fetching(data) {
                 document.getElementById(`fwind${i}`).innerHTML = "Wind: " + response.daily[i].wind_speed + " mph";
                 document.getElementById(`fhumi${i}`).innerHTML = "Humidity: " + response.daily[i].humidity + "%";
             }
-        })
+        });
     });
-}
+};
 
 // This loads all data in Local Storage
 function load() {
@@ -81,35 +81,40 @@ function load() {
     }
 
     locations.forEach(createBtn);
-}
+};
 
 // This saves to Local Storage
 function localSave() {
     localStorage.setItem("locations", JSON.stringify(locations));
-}
+};
 
 // This creates the buttons for the search history
 function createBtn(x) {
-    var btn = document.createElement("button");
-    btn.type = "button";
+    var btn = document.createElement("div");
+    // btn.type = "button";
     btn.className = "btn btn-outline-primary searchA";
     btn.innerHTML = x;
-    btn.id = x;
     document.getElementById('searchH').appendChild(btn);
-}
+};
 
 // This removes all child elements of a parent
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
-}
+};
 
 // This will search your selected search history
-$(".searchA").on('click', function() {
-    var x = $(this).val();
-    console.log(x);
+$(".searchA").click(function() {
+    var x = $(this).text();
+    fetching(x);
 });
 
 load();
-document.getElementById("locationSearch").addEventListener("submit", searchW);
+document.getElementById("locationSearch").addEventListener("keyup", function(event) {
+    if(event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("locationSearch").click();
+        searchW();
+    }
+});
