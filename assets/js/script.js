@@ -29,7 +29,7 @@ function searchW() {
 // This fetches the data from the apis
 function fetching(data) {
     // This searches a city and returns long and lat
-    fetch('http://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + data)
+    fetch('https://api.positionstack.com/v1/forward?access_key=8b6705bd3db1ed3c15005b1f93926e8e&query=' + data)
     .then(function(response) {
             return response.json();
     })
