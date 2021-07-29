@@ -105,8 +105,9 @@ function removeAllChildNodes(parent) {
 };
 
 // This will search your selected search history
-$(".searchA").click(function() {
-    var x = $(this).text();
+$("#searchH").on("click", "div", function() {
+    var x = $(this).text().trim();
+
     fetching(x);
 });
 
